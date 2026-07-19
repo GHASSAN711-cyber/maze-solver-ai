@@ -1,10 +1,12 @@
 import tkinter as tk
+from tkinter import ttk
 import time
 
 from algorithms.bfs import bfs
 from algorithms.dfs import dfs
 from algorithms.greedy import greedy
 from algorithms.astar import astar
+from algorithms.ucs import ucs
 
 from utils.utils import find_start_goal
 
@@ -105,16 +107,24 @@ class MazeGUI:
         )
 
         self.astar_btn.grid(row=0, column=3, padx=5)
+        self.ucs_btn = tk.Button(
+    self.buttons,
+    text="UCS",
+    width=10,
+    command=self.run_ucs
+)
+
+        self.ucs_btn.grid(row=0, column=4, padx=5)
 
 
         self.compare_btn = tk.Button(
-            self.buttons,
-            text="Compare",
-            width=10,
-            command=self.compare_all
+        self.buttons,
+        text="Compare",
+        width=10,
+        command=self.compare_all
         )
 
-        self.compare_btn.grid(row=0, column=4, padx=5)
+        self.compare_btn.grid(row=0, column=5, padx=5)
 
 
         self.reset_btn = tk.Button(
@@ -124,7 +134,7 @@ class MazeGUI:
             command=self.reset
         )
 
-        self.reset_btn.grid(row=0, column=5, padx=5)
+        self.reset_btn.grid(row=0, column=6, padx=5)
 
 
         # ==========================
@@ -248,6 +258,30 @@ class MazeGUI:
                 len(path),
                 elapsed
             )
+    # ==========================
+# Uniform Cost Search
+# ==========================
+
+    def run_ucs(self):
+
+     self.reset()
+
+     start = time.perf_counter()
+
+     path, visited = ucs(self.maze, self)
+
+     elapsed = time.perf_counter() - start
+
+     if path:
+
+         self.draw_path(path)
+
+         self.update_info(
+            "Uniform Cost Search",
+            visited,
+            len(path),
+            elapsed
+        )
 
 
     # ==========================
@@ -256,35 +290,59 @@ class MazeGUI:
 
     def compare_all(self):
 
-        algorithms = [
-            ("BFS", bfs),
-            ("DFS", dfs),
-            ("Greedy", greedy),
-            ("A*", astar)
-        ]
+     algorithms = [
+        ("BFS", bfs),
+        ("DFS", dfs),
+        ("Greedy", greedy),
+        ("A*", astar),
+        ("UCS", ucs)
+    ]
 
+     results = []
 
-        print("\n===== Comparison =====")
+     for name, algorithm in algorithms:
 
+        start = time.perf_counter()
 
-        for name, algorithm in algorithms:
+        path, visited = algorithm(self.maze)
 
-            start = time.perf_counter()
+        elapsed = time.perf_counter() - start
 
-            path, visited = algorithm(self.maze)
+        results.append((
+            name,
+            visited,
+            len(path) if path else 0,
+            round(elapsed, 6)
+        ))
 
-            elapsed = time.perf_counter() - start
+     self.show_comparison(results)
 
+    def show_comparison(self, results):
 
-            print(
-                name,
-                "| Visited:",
-                visited,
-                "| Path:",
-                len(path) if path else 0,
-                "| Time:",
-                round(elapsed, 6)
-            )
+     window = tk.Toplevel(self.window)
+     window.title("Algorithm Comparison")
+
+     tree = ttk.Treeview(
+         window,
+        columns=("Algorithm", "Visited", "Path", "Time"),
+        show="headings",
+        height=5
+    )
+
+     tree.heading("Algorithm", text="Algorithm")
+     tree.heading("Visited", text="Visited")
+     tree.heading("Path", text="Path")
+     tree.heading("Time", text="Time (sec)")
+
+     tree.column("Algorithm", width=120, anchor="center")
+     tree.column("Visited", width=80, anchor="center")
+     tree.column("Path", width=80, anchor="center")
+     tree.column("Time", width=100, anchor="center")
+
+     for row in results:
+        tree.insert("", tk.END, values=row)
+
+     tree.pack(padx=10, pady=10)
 
 
     # ==========================

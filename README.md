@@ -193,7 +193,7 @@ Python Programmer
 
 GitHub:
 
-> *(Add your GitHub profile here)*
+> *https://github.com/GHASSAN711-cyber
 
 Fiverr:
 
@@ -201,41 +201,25 @@ Fiverr:
 
 Upwork:
 
-> *(Coming Soon)*
+> https://www.upwork.com/freelancers
 
 ---
 
 # 📸 Screenshots
 
-## 🖥️ Main Interface
+## ## 📸 Screenshots
 
-واجهة التطبيق الرئيسية التي تسمح للمستخدم باختيار خوارزمية البحث وتشغيل حل المتاهة.
+### Main Interface
+![Main Interface](./screenshots/main_interface.png)
 
-![Main Interface](screenshots/main_interface.png)
+### A* Algorithm Solution
+![A* Solution](./screenshots/astar_solution.png)
 
+### BFS Algorithm Solution
+![BFS Solution](./screenshots/bfs_solution.png)
 
----
-
-## 🤖 A* Algorithm Solution
-
-تطبيق خوارزمية A* باستخدام البحث الموجه مع Heuristic للوصول إلى المسار الأمثل.
-
-![A* Solution](screenshots/astar_solution.png)
-
-
----
-
-## 🔍 Algorithm Comparison
-
-مقارنة أداء خوارزميات البحث المختلفة من حيث:
-
-- عدد العقد التي تمت زيارتها (Visited Nodes)
-- طول المسار (Path Length)
-- زمن التنفيذ (Execution Time)
-
-![Algorithm Comparison](screenshots/algorithm_comparison.png)
-
-
+### DFS Algorithm Solution
+![DFS Solution](./screenshots/dfs_solution.png)
 ---
 
 ---

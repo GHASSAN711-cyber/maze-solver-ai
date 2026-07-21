@@ -205,22 +205,23 @@ Upwork:
 
 ---
 
-# 📸 Screenshots
-
-## ## 📸 Screenshots
+## 📸 Screenshots
 
 ### Main Interface
+
 ![Main Interface](./screenshots/main_interface.png)
 
 ### A* Algorithm Solution
+
 ![A* Solution](./screenshots/astar_solution.png)
 
 ### BFS Algorithm Solution
+
 ![BFS Solution](./screenshots/bfs_solution.png)
 
 ### DFS Algorithm Solution
+
 ![DFS Solution](./screenshots/dfs_solution.png)
----
 
 ---
 

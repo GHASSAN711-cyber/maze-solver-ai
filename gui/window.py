@@ -7,6 +7,7 @@ from algorithms.dfs import dfs
 from algorithms.greedy import greedy
 from algorithms.astar import astar
 from algorithms.ucs import ucs
+from algorithms.Bidirectional import Bidirectional
 
 from utils.utils import find_start_goal
 
@@ -124,17 +125,26 @@ class MazeGUI:
         command=self.compare_all
         )
 
-        self.compare_btn.grid(row=0, column=5, padx=5)
+        self.compare_btn.grid(row=0, column=8, padx=5)
+
+        self.Bidirectional_btn = tk.Button(
+    self.buttons,
+    text="Bidirectional",
+    width=12,
+    command=self.run_Bidirectional
+)
+
+        self.Bidirectional_btn.grid(row=0, column=5, padx=5)
 
 
         self.reset_btn = tk.Button(
-            self.buttons,
+        self.buttons,
             text="Reset",
             width=10,
             command=self.reset
         )
 
-        self.reset_btn.grid(row=0, column=6, padx=5)
+        self.reset_btn.grid(row=0, column=7, padx=5)
 
 
         # ==========================
@@ -282,6 +292,26 @@ class MazeGUI:
             len(path),
             elapsed
         )
+    def run_Bidirectional(self):
+
+     self.reset()
+
+     start = time.perf_counter()
+
+     path, visited = Bidirectional(self.maze, self)
+
+     elapsed = time.perf_counter() - start
+
+     if path:
+
+         self.draw_path(path)
+
+         self.update_info(
+            "Bidirectional",
+            visited,
+            len(path),
+            elapsed
+        )
 
 
     # ==========================
@@ -295,7 +325,8 @@ class MazeGUI:
         ("DFS", dfs),
         ("Greedy", greedy),
         ("A*", astar),
-        ("UCS", ucs)
+        ("UCS", ucs),
+        ("Bidirectional", Bidirectional),
     ]
 
      results = []

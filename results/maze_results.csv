@@ -1,0 +1,7 @@
+Algorithm,Visited Nodes,Path Length,Time (sec),Memory (MB)
+BFS,39,20,0.014218,4.62
+DFS,32,20,0.011962,5.6
+Greedy,27,24,0.009147,7.42
+A*,27,20,0.007563,8.41
+UCS,39,20,0.010373,6.11
+Bidirectional,37,20,0.000506,7.55

@@ -2,6 +2,7 @@ from gui.window import MazeGUI
 from data.maze import maze
 
 
+
 def main():
 
     app = MazeGUI(maze)
